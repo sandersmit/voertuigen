@@ -1,0 +1,107 @@
+///// Font Imports /////
+@font-face {
+  font-family: "Segoe-Pro-Regular";
+  src: url("../font/segoePro/SegoePro-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Segoe-Pro-Italic";
+  src: url("../font/segoePro/SegoePro-Italic.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Segoe-Pro-Light";
+  src: url("../font/segoePro/SegoePro-Light.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Segoe-Pro-Semibold";
+  src: url("../font/segoePro/SegoePro-Semibold.ttf") format("truetype");
+}
+  
+  
+  h1,h2,h3,h4,h5,h6{
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: normal;
+  }
+  label{
+    font-family: "Segoe-Pro-Light";
+  }
+  
+  h1 { 
+    font-family: "Segoe-Pro-Regular", arial;
+    color: $voertuig-white-sec;
+    font-size: 1.5rem;
+    font-weight: 100;
+    line-height: 1rem;
+  }
+  
+  h2 {
+    font-family: 'Segoe-Pro-Regular', arial;
+    color: $voertuig-black;
+    font-size: 1.2rem;
+    font-weight: 100;
+    line-height: 1;
+   
+  }
+  h3, h3 a{
+    font-size: 1rem;
+    font-family: "Segoe-Pro-Semibold";
+    color: $voertuig-blue;
+    @media screen and (min-width: 768px) {
+      font-size: 1.3rem;
+    }
+  
+  }
+  H4{
+    font-family: "Segoe-Pro-Light";
+    font-size: 1rem;
+    color: $voertuig-blue-sec;
+    margin-top:0px;
+    margin: 0px;
+    word-break: break-all;
+  }
+  h5 {
+    line-height: 1;
+    font-size: 1rem;
+    font-family: 'Segoe-Pro-Semibold';
+    padding: 0.4rem;
+    text-align: right;
+  }
+  p{
+    font-family: "Segoe-Pro-Semibold", arial;
+    color: $voertuig-blue;
+  }
+  button{
+    font-size: 1.1rem;
+    font-family: "Segoe-Pro-Semibold", arial;
+  }
+  input{
+    font-family: "Segoe-Pro-Italic", arial;
+    color:$voertuig-white;
+  }
+  section{
+    font-family: "Segoe-Pro-Regular";
+  }
+  a {
+    &.backlink {
+      font-family: "Segoe-Pro-Semibold", arial;
+      text-transform: uppercase;
+    }
+  }
+
+
+  .Segoe-Pro-Regular {
+    font-family: "Segoe-Pro-Regular", arial;
+  }
+  .Segoe-Pro-Italic {
+    font-family: "Segoe-Pro-Italic", arial;
+  }
+  .Segoe-Pro-Light {
+    font-family: "Segoe-Pro-Light", arial;
+  }
+  .Segoe-Pro-Semibold {
+    font-family: "Segoe-Pro-Semibold", arial;
+  }
+  
