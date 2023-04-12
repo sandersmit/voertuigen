@@ -12,9 +12,9 @@ import {
 } from './displayVoertuigDetail.js';
 
 //use local download
-const endpoint1 = '../../data/rdw.json';
+//const endpoint1 = '../../data/rdw.json';
 //use online
-//const endpoint1 = 'https://opendata.rdw.nl/resource/m9d7-ebf2.json';
+const endpoint1 = 'https://opendata.rdw.nl/resource/m9d7-ebf2.json';
 const fetchEndpoint1 = function () {
     fetch(endpoint1).then(function (response) {
         return response.json();
