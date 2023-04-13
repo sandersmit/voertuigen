@@ -62,7 +62,7 @@ function fillArrays(AllData,newdataUpdate){
         let voertuigHandelsBenaming = arr[index].handelsbenaming;
         let newElem = document.createElement('li');
         newElem.innerHTML =
-        `<a href='/voortuigdetail.html' data-voertuigId=${voertuigenKenteken}><h3 data-voertuigId=${voertuigenKenteken}>
+        `<a href='voortuigdetail.html' data-voertuigId=${voertuigenKenteken}><h3 data-voertuigId=${voertuigenKenteken}>
         ${voertuigMerkVar}<span>${voertuigHandelsBenaming}</span></h3></a>`;
         newListholder.appendChild(newElem);
         newElem.firstChild.addEventListener("click", setVoertuigDetailPage);
