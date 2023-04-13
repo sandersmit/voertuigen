@@ -217,13 +217,47 @@ a {
   }
 }
 
+.loader {
+  width: 2rem;
+  height: 2rem;
+  border: 5px solid $voertuig-white;
+  border-top: 6px solid $voertuig-blue;
+  border-radius: 100%;
+  margin: auto;
+  animation: spin 1s infinite linear;
+  z-index: 6;
+  position: absolute;
+  top: 50%;
+  left: calc(50% - 2rem);
+}
+@keyframes spin {
+  from {
+      transform: rotate(0deg);
+  }
+  to {
+      transform: rotate(360deg);
+  }
+}
+
 .pagination {
+  &:after{
+    content:"";
+    position: fixed;
+    display: block;
+   
+    background-image:  linear-gradient(to right, rgba(255,0,0,0), $voertuig-black);
+    width: 63px;
+    left: 190px;
+    height: 58px;
+    z-index: 5;
+  }
   display: flex;
   position: fixed;
     bottom: 0px;
     background: $voertuig-grey;
     z-index: 2;
-    width: 100%;
+    width: 250px;
+    overflow: auto;
     margin: 0;
     margin-block-start: 0;
     margin-block-end: 0;
@@ -233,7 +267,7 @@ a {
       color: $voertuig-blue;
       background-color: $voertuig-black;
       text-decoration: none;
-     cursor: pointer;
+     cursor:ew-resize;
      line-height: 1rem;
      padding: 20px;
      margin:0px;
@@ -249,7 +283,7 @@ a {
   position: fixed;
   bottom: 0;
   top: calc(100% - 50px);
-  right: -210px;
+  right: -205px;
   z-index: 3;
   max-height: 300px;
   overflow-y:scroll ;
@@ -272,6 +306,7 @@ a {
     cursor: pointer;
     color:$voertuig-blue;
     margin: 0.5rem;
+    margin-left: 1rem;
     background-image: url(../img/info-circle-solid.svg);
     background-repeat: no-repeat;
     background-size: 15px;

@@ -6,22 +6,22 @@ function setVoertuigDetailPage(event) {
     event.target.parentElement.classList.add('test');
     console.log("event.target.name"+ event.target.parentElement);
     //setting data attribute with movie id
-    const movielinkAttr = event.target.parentElement.getAttribute("data-voertuigid");
-    console.log("setvoertuigDetailPage()"+ movielinkAttr);
+    const voertuiglinkAttr = event.target.parentElement.getAttribute("data-voertuigid");
+    console.log("setvoertuigDetailPage()"+ voertuiglinkAttr);
     //setting local storage
-    setLocalStorage(movielinkAttr);
+    setLocalStorage(voertuiglinkAttr);
 }
 
-function setLocalStorage(movielinkAttr){
+function setLocalStorage(voertuiglinkAttr){
     console.log("setLocalStorage"+ localStorage.length);
     let newId = localStorage.length + 1;
-    localStorage.setItem(newId, movielinkAttr);
+    localStorage.setItem(newId, voertuiglinkAttr);
 }
 
 function loadvoertuigDetailPage() {
     let lastestItem = localStorage.length;
-    const currmovielinkAttrLocalStorage = localStorage.getItem(lastestItem);
-     fetchEndpoint2(currmovielinkAttrLocalStorage);
+    const currvoertuiglinkAttrLocalStorage = localStorage.getItem(lastestItem);
+     fetchEndpoint2(currvoertuiglinkAttrLocalStorage);
 }
 
 function printpredefined(predefinedVoortuig, VoertuigDetailContainer) {

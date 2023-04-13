@@ -9,6 +9,7 @@ import {
 function updateAppData() {
     console.log("updateAppData()");
     let AllData = initApp.voertuigen;
+    console.log(AllData[0]);
     return AllData;
 }
 
@@ -43,8 +44,9 @@ function fillArrays(AllData,newdataUpdate){
     const voertuigOverzichtContainer = document.getElementById("VoertuigOverzichtContainer");
     voertuigOverzichtContainer.innerHTML = "";
     let newListholder = document.createElement('ul');
+    console.log(AllData[0]);
     for (let i in AllData) {
-        //console.log();
+       
         allcontentpages.push(AllData[i]);
         }
         if (!newdataUpdate) {
@@ -54,7 +56,6 @@ function fillArrays(AllData,newdataUpdate){
             console.log("newdataUpdate with value:" + newdataUpdate);
         }
         console.log("updateData");
-        
         allcontentpages.slice(newdataUpdate[0] ,newdataUpdate[1]).forEach(function(value, index, arr){  
         let voertuigMerkVar = arr[index].merk;
         let voortuigSoort =  arr[index].voertuigsoort;
@@ -68,7 +69,6 @@ function fillArrays(AllData,newdataUpdate){
         newElem.firstChild.addEventListener("click", setVoertuigDetailPage);
      });
      voertuigOverzichtContainer.appendChild(newListholder);
-    
  }
 
  function trackDisplayVoortuig(){
@@ -87,39 +87,41 @@ function fillArrays(AllData,newdataUpdate){
     trackEl.innerHTML+= `<h5>laatst bekeken voortuigen: </h5>`; 
     trackEl.addEventListener("click", openclose); 
 }
+
+
 function openclose(event)
 {
 console.log(event);
 this.classList.toggle("open");
 }
-
-function init() {
-    console.log(initApp.voertuigen[0]);
-    let AllData = initApp.voertuigen;
-    //console.log("fill arrays"+ blockholder)
-    //blockholder.innerHTML = "";
-    let totalPerPage = 50; 
-    let pagenitionTotal = initApp.voertuigen.length/totalPerPage;
-    addPaginition(pagenitionTotal);
-    fillArrays(AllData);
-}
  
 
 function addPaginition(pagenitionTotal){
-
-    //console.log("blockholder:"+ blockholder.id)
+    console.log("addPaginition")
     const pagenitionMenu = document.createElement("ul");
     pagenitionMenu.classList.add('pagination');  
+        //const container = document.getElementById("container");
+    // add horiontal scroll
+    pagenitionMenu.addEventListener("wheel", function (e) {
+        if (e.deltaY > 0) {
+            pagenitionMenu.scrollLeft += 100;
+            //prevent scoll on the page
+        e.preventDefault();
+        }
+        else {
+            pagenitionMenu.scrollLeft -= 100;
+        e.preventDefault();
+        }
+    });
     let container = document.getElementsByClassName("gridContainer");
     container[0].after(pagenitionMenu);
     //blockholder.before(pagenitionMenu);
-        for (let index = 1; index < 5; index++) {
+        for (let index = 1; index < pagenitionTotal; index++) {
         updatePaginition(pagenitionMenu,index);
         }
 }
 
 function updatePaginition(pagenitionMenu,index){
-    
        let pagenitionItem = document.createElement("li");
         pagenitionItem.classList.add('btn');
         pagenitionItem.addEventListener("click", changeStateMenuItem);
@@ -140,6 +142,18 @@ function updatePaginition(pagenitionMenu,index){
 
 if (localStorage.length > 0) {
     trackDisplayVoortuig();
+}
+
+function init() {
+    console.log(initApp.voertuigen.length);
+    let AllData = initApp.voertuigen;
+    //console.log("fill arrays"+ blockholder)
+    //blockholder.innerHTML = "";
+    let totalPerPage = 50; 
+    let pagenitionTotal = initApp.voertuigen.length/totalPerPage;
+    console.log(pagenitionTotal)
+    addPaginition(pagenitionTotal);
+    fillArrays(AllData);
 }
 
 export {

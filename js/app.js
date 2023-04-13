@@ -15,7 +15,6 @@ const initApp = {
     init: function () {
         console.log("init app");
         if (document.getElementById('voertuigOverzichtPage') != null) {
-            console.log("??");
             fetchEndpoint1();   
         }
         if (document.getElementById('voertuigDetailPage') != null) {
