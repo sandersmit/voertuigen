@@ -6,9 +6,6 @@ import {
 } from './displayVoertuigDetail.js';
 
 
-
-
-
 function updateAppData() {
     let AllData = initApp.voertuigen;
     return AllData;
@@ -20,54 +17,37 @@ function updateRange( rangeNumber ){
     }
     let baseStartRange = 50 * rangeNumber;
     let baseEndRange = baseStartRange + 50;
-    console.log(`new updateRange() range: + ${baseStartRange} ${baseEndRange}` );
     let rangeArray = [];
     rangeArray.push(baseStartRange,baseEndRange);
-    console.log(rangeArray);
     return rangeArray;
 }
 
-function updatePaginitionItems(index,filterVal){
+function updatePaginitionItems(index){
     let rangeNumber = index; 
-    fillArrays(updateAppData(), updateRange(rangeNumber),filterVal);
+    fillArrays(updateAppData(), updateRange(rangeNumber));
 }
 
-function fillArrays(AllData,newdataUpdate,filterVal){
+function fillArrays(AllData,newdataUpdate){
     let allcontentpages = [];
     const voertuigOverzichtContainer = document.getElementById("VoertuigOverzichtContainer");
     voertuigOverzichtContainer.innerHTML = "";
     let newListholder = document.createElement('ul');
     for (let i in AllData) {
-        //console.log(AllData[i])
-            if (filterVal == "Motorfiets") {
-                console.log("motorfiets selectie")
-                allcontentpages.push(AllData[i].Motorfiets);
-            }
-            else if (filterVal == "Personenauto") {
-                console.log("Personenauto selectie")
-                allcontentpages.push(AllData[i].Personenauto);
-            }
-            else{
-                console.log("geen selectie")
-                allcontentpages.push(AllData[i]);
-            }
+        allcontentpages.push(AllData[i]);
         }
         if (!newdataUpdate) {
             newdataUpdate = [0,50];
         }
 
         allcontentpages.slice(newdataUpdate[0] ,newdataUpdate[1]).forEach(function(value, index, arr){  
-        //let voertuigMerkVar = arr[index].merk;
+        let voertuigMerkVar = arr[index].merk;
         let voortuigSoort =  arr[index].voertuigsoort;
-        //let voertuigenKenteken = arr[index].kenteken;
-        //let voertuigHandelsBenaming = arr[index].handelsbenaming;
+        let voertuigenKenteken = arr[index].kenteken;
+        let voertuigHandelsBenaming = arr[index].handelsbenaming;
         let newElem = document.createElement('li');
-        // newElem.innerHTML =
-        // `<a href='voortuigdetail.html' data-voertuigId=${voertuigenKenteken}><h3 data-voertuigId=${voertuigenKenteken}>
-        // ${voertuigMerkVar}<span>${voertuigHandelsBenaming}</span><span>${voortuigSoort}</span></h3></a>`;
         newElem.innerHTML =
-        `<a href='voortuigdetail.html' ><h3 >
-        <span>${voortuigSoort}</span></h3></a>`;
+        `<a href='voortuigdetail.html' data-voertuigId=${voertuigenKenteken}><h3 data-voertuigId=${voertuigenKenteken}>
+        ${voertuigMerkVar}<span>${voertuigHandelsBenaming}</span></h3></a>`;
         newListholder.appendChild(newElem);
         newElem.firstChild.addEventListener("click", setVoertuigDetailPage);
      });
@@ -92,15 +72,10 @@ function fillArrays(AllData,newdataUpdate,filterVal){
 function openclose(event)
 {
     if (this.classList.contains('open')) {
-        console.log("contains open");
         this.classList.toggle("open");
-        //document.removeEventListener('click', checkDomClick);
-        
     } else {
-        console.log("not contains open");
         this.classList.toggle("open");
-        document.addEventListener('click', checkDomClick);
-        
+        document.addEventListener('click', checkDomClick); 
     }
 }
 
@@ -149,7 +124,6 @@ function updatePaginition(pagenitionMenu,index){
           
           function changeStateMenuItem(event) {
             updatePaginitionItems(index)
-            console.log("index"+index)
             let current = document.getElementsByClassName("active");
             current[0].className = current[0].className.replace(" active", "");
             this.className += " active";
@@ -157,7 +131,6 @@ function updatePaginition(pagenitionMenu,index){
             }
             function checkmouseX(e) {  
                 this.scrollLeft =+ e.clientX;
-                console.log(this.scrollLeft);
             }
 
         pagenitionItem.innerHTML += index;
@@ -168,39 +141,12 @@ if (localStorage.length > 0) {
     trackDisplayVoortuig();
 }
 
-function initFilter(){
-    let filters = document.querySelectorAll(".filter");
-    const filteroptionMotorfiets = document.getElementById("Motorfiets");
-    const filteroptionPersonenauto = document.getElementById("Personenauto");
-    const filteroptionBromfiets = document.getElementById("Bromfiets");
-    //const filteroptionPersonenauto = document.getElementById("Personenauto");
-    //filters[0].getElementById("Motorfiets");
-    console.log(filters[0])
-    filteroptionMotorfiets.addEventListener("click", filtering);
-    filteroptionPersonenauto.addEventListener("click", filtering);
-    filteroptionBromfiets.addEventListener("click", filtering);
-    //filteroptionPersonenauto.addEventListener("click", filtering);
-}
-function filtering(event){
-    let filterVal = event.target.value;
-    let AllData = initApp.voertuigen;
-    console.log(AllData);
-    console.log(filterVal);
-    //setting first page
-    let index = 0;
-   // fillArrays(AllData,newdataUpdate,filterVal);
-   updatePaginitionItems(index,filterVal)
-}
-
 function init() {
     let AllData = initApp.voertuigen;
     let totalPerPage = 50; 
     let pagenitionTotal = initApp.voertuigen.length/totalPerPage;
     addPaginition(pagenitionTotal);
-    console.log(AllData);
     fillArrays(AllData);
-    initFilter();
-    
 }
 
 export {
