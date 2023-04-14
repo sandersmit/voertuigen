@@ -4,16 +4,13 @@ import {
 
 function setVoertuigDetailPage(event) {
     event.target.parentElement.classList.add('test');
-    console.log("event.target.name"+ event.target.parentElement);
-    //setting data attribute with movie id
+    //setting data attribute to link on the detail page
     const voertuiglinkAttr = event.target.parentElement.getAttribute("data-voertuigid");
-    console.log("setvoertuigDetailPage()"+ voertuiglinkAttr);
-    //setting local storage
+    //setting local storage 
     setLocalStorage(voertuiglinkAttr);
 }
 
 function setLocalStorage(voertuiglinkAttr){
-    console.log("setLocalStorage"+ localStorage.length);
     let newId = localStorage.length + 1;
     localStorage.setItem(newId, voertuiglinkAttr);
 }
@@ -25,17 +22,11 @@ function loadvoertuigDetailPage() {
 }
 
 function printpredefined(predefinedVoortuig, VoertuigDetailContainer) {
-
-   console.log("predefinedVoortuig"+predefinedVoortuig[0].kenteken);
    const listholder = document.createElement("ul");
    const backBtn = document.createElement("a");
    const header = document.createElement("header");
    backBtn.classList.add("backlink");
    backBtn.setAttribute("href", "overview.html");
-
-   for (const [key, value] of Object.entries(predefinedVoortuig)) {
-        console.log(`${key}: ${value.merk}`);
-      }
     let generatedKeyArray = Object.keys(predefinedVoortuig[0]);
     let generatedValueArray = Object.values(predefinedVoortuig[0]);
       for (var i = 0; i < 3; i++) {

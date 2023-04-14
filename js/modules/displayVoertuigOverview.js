@@ -6,18 +6,16 @@ import {
 } from './displayVoertuigDetail.js';
 
 
+
+
+
 function updateAppData() {
-    console.log("updateAppData()");
     let AllData = initApp.voertuigen;
-    console.log(AllData[0]);
     return AllData;
 }
 
 function updateRange( rangeNumber ){
-    if ( rangeNumber > 1 ) {
-        console.log("rangeNumber > 0: "+ rangeNumber );
-    }else{
-        console.log("rangeNumber = 0: "+ rangeNumber );
+    if ( rangeNumber == 0 ) {
         rangeNumber = 0;
     }
     let baseStartRange = 50 * rangeNumber;
@@ -29,42 +27,47 @@ function updateRange( rangeNumber ){
     return rangeArray;
 }
 
-function updatePaginitionItems(index){
-    console.log( "update index:" + index);
+function updatePaginitionItems(index,filterVal){
     let rangeNumber = index; 
-    //console.log( "update rangenumber:" + updateRange(rangeNumber));  
-    //updateRange(rangeNumber); 
-    fillArrays(updateAppData(), updateRange(rangeNumber));
+    fillArrays(updateAppData(), updateRange(rangeNumber),filterVal);
 }
 
-function fillArrays(AllData,newdataUpdate){
-    //console.log("fill arrays"+ blockholder)
-    //blockholder.innerHTML = "";
+function fillArrays(AllData,newdataUpdate,filterVal){
     let allcontentpages = [];
     const voertuigOverzichtContainer = document.getElementById("VoertuigOverzichtContainer");
     voertuigOverzichtContainer.innerHTML = "";
     let newListholder = document.createElement('ul');
-    console.log(AllData[0]);
     for (let i in AllData) {
-       
-        allcontentpages.push(AllData[i]);
+        //console.log(AllData[i])
+            if (filterVal == "Motorfiets") {
+                console.log("motorfiets selectie")
+                allcontentpages.push(AllData[i].Motorfiets);
+            }
+            else if (filterVal == "Personenauto") {
+                console.log("Personenauto selectie")
+                allcontentpages.push(AllData[i].Personenauto);
+            }
+            else{
+                console.log("geen selectie")
+                allcontentpages.push(AllData[i]);
+            }
         }
         if (!newdataUpdate) {
-            console.log("!newdataUpdate: " + newdataUpdate);
             newdataUpdate = [0,50];
-        } else {
-            console.log("newdataUpdate with value:" + newdataUpdate);
         }
-        console.log("updateData");
+
         allcontentpages.slice(newdataUpdate[0] ,newdataUpdate[1]).forEach(function(value, index, arr){  
-        let voertuigMerkVar = arr[index].merk;
+        //let voertuigMerkVar = arr[index].merk;
         let voortuigSoort =  arr[index].voertuigsoort;
-        let voertuigenKenteken = arr[index].kenteken;
-        let voertuigHandelsBenaming = arr[index].handelsbenaming;
+        //let voertuigenKenteken = arr[index].kenteken;
+        //let voertuigHandelsBenaming = arr[index].handelsbenaming;
         let newElem = document.createElement('li');
+        // newElem.innerHTML =
+        // `<a href='voortuigdetail.html' data-voertuigId=${voertuigenKenteken}><h3 data-voertuigId=${voertuigenKenteken}>
+        // ${voertuigMerkVar}<span>${voertuigHandelsBenaming}</span><span>${voortuigSoort}</span></h3></a>`;
         newElem.innerHTML =
-        `<a href='voortuigdetail.html' data-voertuigId=${voertuigenKenteken}><h3 data-voertuigId=${voertuigenKenteken}>
-        ${voertuigMerkVar}<span>${voertuigHandelsBenaming}</span></h3></a>`;
+        `<a href='voortuigdetail.html' ><h3 >
+        <span>${voortuigSoort}</span></h3></a>`;
         newListholder.appendChild(newElem);
         newElem.firstChild.addEventListener("click", setVoertuigDetailPage);
      });
@@ -75,10 +78,8 @@ function fillArrays(AllData,newdataUpdate){
     let trackEl = document.createElement('div');
     let container = document.getElementsByClassName("gridContainer");
     trackEl.classList.add('trackEl');
-   
     for (var i = 1; i <= localStorage.length; i++) {
         let trackElitem = document.createElement('span');
-        console.log("getLocalStorage"+localStorage.length);
         const prevvoertuiglinkAttrLocalStorage = localStorage.getItem(i);
         trackElitem.append(prevvoertuiglinkAttrLocalStorage);    
         trackEl.prepend(trackElitem);
@@ -88,24 +89,39 @@ function fillArrays(AllData,newdataUpdate){
     trackEl.addEventListener("click", openclose); 
 }
 
-
 function openclose(event)
 {
-console.log(event);
-this.classList.toggle("open");
+    if (this.classList.contains('open')) {
+        console.log("contains open");
+        this.classList.toggle("open");
+        //document.removeEventListener('click', checkDomClick);
+        
+    } else {
+        console.log("not contains open");
+        this.classList.toggle("open");
+        document.addEventListener('click', checkDomClick);
+        
+    }
 }
- 
+
+//function to check click event outside components
+function checkDomClick(event) {
+    let trackEle = document.querySelectorAll(".trackEl");
+    const outsideClickForComponent1 = !trackEle[0].contains(event.target);
+    if (outsideClickForComponent1) {
+        trackEle[0].classList.toggle("open");
+        document.removeEventListener('click', checkDomClick);
+    } 
+  };
 
 function addPaginition(pagenitionTotal){
-    console.log("addPaginition")
     const pagenitionMenu = document.createElement("ul");
     pagenitionMenu.classList.add('pagination');  
-        //const container = document.getElementById("container");
     // add horiontal scroll
     pagenitionMenu.addEventListener("wheel", function (e) {
         if (e.deltaY > 0) {
             pagenitionMenu.scrollLeft += 100;
-            //prevent scoll on the page
+        //prevent scoll on the page
         e.preventDefault();
         }
         else {
@@ -113,9 +129,8 @@ function addPaginition(pagenitionTotal){
         e.preventDefault();
         }
     });
-    let container = document.getElementsByClassName("gridContainer");
-    container[0].after(pagenitionMenu);
-    //blockholder.before(pagenitionMenu);
+        let container = document.getElementsByClassName("gridContainer");
+        container[0].after(pagenitionMenu);
         for (let index = 1; index < pagenitionTotal; index++) {
         updatePaginition(pagenitionMenu,index);
         }
@@ -124,18 +139,27 @@ function addPaginition(pagenitionTotal){
 function updatePaginition(pagenitionMenu,index){
        let pagenitionItem = document.createElement("li");
         pagenitionItem.classList.add('btn');
+        let position = 0;
         pagenitionItem.addEventListener("click", changeStateMenuItem);
+        pagenitionMenu.addEventListener("mousemove", checkmouseX);
           let btns = document.getElementsByClassName("btn");
           for (var i = 0; i < btns.length; i++) {
-            btns[0].classList.add('active');
-           
+            btns[0].classList.add('active');  
           }
-          function changeStateMenuItem() {
-            updatePaginitionItems(index);
+          
+          function changeStateMenuItem(event) {
+            updatePaginitionItems(index)
+            console.log("index"+index)
             let current = document.getElementsByClassName("active");
             current[0].className = current[0].className.replace(" active", "");
             this.className += " active";
+            
             }
+            function checkmouseX(e) {  
+                this.scrollLeft =+ e.clientX;
+                console.log(this.scrollLeft);
+            }
+
         pagenitionItem.innerHTML += index;
         pagenitionMenu.appendChild(pagenitionItem);
 }
@@ -144,16 +168,39 @@ if (localStorage.length > 0) {
     trackDisplayVoortuig();
 }
 
-function init() {
-    console.log(initApp.voertuigen.length);
+function initFilter(){
+    let filters = document.querySelectorAll(".filter");
+    const filteroptionMotorfiets = document.getElementById("Motorfiets");
+    const filteroptionPersonenauto = document.getElementById("Personenauto");
+    const filteroptionBromfiets = document.getElementById("Bromfiets");
+    //const filteroptionPersonenauto = document.getElementById("Personenauto");
+    //filters[0].getElementById("Motorfiets");
+    console.log(filters[0])
+    filteroptionMotorfiets.addEventListener("click", filtering);
+    filteroptionPersonenauto.addEventListener("click", filtering);
+    filteroptionBromfiets.addEventListener("click", filtering);
+    //filteroptionPersonenauto.addEventListener("click", filtering);
+}
+function filtering(event){
+    let filterVal = event.target.value;
     let AllData = initApp.voertuigen;
-    //console.log("fill arrays"+ blockholder)
-    //blockholder.innerHTML = "";
+    console.log(AllData);
+    console.log(filterVal);
+    //setting first page
+    let index = 0;
+   // fillArrays(AllData,newdataUpdate,filterVal);
+   updatePaginitionItems(index,filterVal)
+}
+
+function init() {
+    let AllData = initApp.voertuigen;
     let totalPerPage = 50; 
     let pagenitionTotal = initApp.voertuigen.length/totalPerPage;
-    console.log(pagenitionTotal)
     addPaginition(pagenitionTotal);
+    console.log(AllData);
     fillArrays(AllData);
+    initFilter();
+    
 }
 
 export {

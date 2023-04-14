@@ -244,30 +244,40 @@ a {
     content:"";
     position: fixed;
     display: block;
-   
     background-image:  linear-gradient(to right, rgba(255,0,0,0), $voertuig-black);
     width: 63px;
-    left: 190px;
+    left: 290px;
+    @media screen and (min-width: 768px) {
+      width: 63px;
+      left: 543px;
+    }
     height: 58px;
     z-index: 5;
   }
+ 
   display: flex;
   position: fixed;
     bottom: 0px;
-    background: $voertuig-grey;
+    background-color: $voertuig-black;
     z-index: 2;
     width: 250px;
+    @media screen and (min-width: 768px) {
+      width: 500px
+    }
     overflow: auto;
     margin: 0;
     margin-block-start: 0;
     margin-block-end: 0;
     padding-inline-start: 0px;
+    padding: 0px 50px;
     li {
       list-style: none;
       color: $voertuig-blue;
       background-color: $voertuig-black;
       text-decoration: none;
      cursor:ew-resize;
+     //cursor:pointer;
+     //cursor: move;
      line-height: 1rem;
      padding: 20px;
      margin:0px;
@@ -296,7 +306,6 @@ a {
     right: 0px;
   }
   &.open{
-    //top: calc(100%);
     top: inherit;
     bottom: 0px;
     right: 0px;
@@ -329,4 +338,8 @@ a {
     text-align: center;
     padding-bottom: 1rem;
   }
+}
+
+form{
+  color: $voertuig-grey-sec;
 }

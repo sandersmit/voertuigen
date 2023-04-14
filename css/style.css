@@ -727,7 +727,7 @@ a.backlink:hover {
   display: flex;
   position: fixed;
   bottom: 0px;
-  background: #2b2c33;
+  background-color: #000;
   z-index: 2;
   width: 250px;
   overflow: auto;
@@ -735,6 +735,7 @@ a.backlink:hover {
   margin-block-start: 0;
   margin-block-end: 0;
   padding-inline-start: 0px;
+  padding: 0px 50px;
 }
 .pagination:after {
   content: "";
@@ -742,9 +743,20 @@ a.backlink:hover {
   display: block;
   background-image: linear-gradient(to right, rgba(255, 0, 0, 0), #000);
   width: 63px;
-  left: 190px;
+  left: 290px;
   height: 58px;
   z-index: 5;
+}
+@media screen and (min-width: 768px) {
+  .pagination:after {
+    width: 63px;
+    left: 543px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .pagination {
+    width: 500px;
+  }
 }
 .pagination li {
   list-style: none;
@@ -811,6 +823,10 @@ a.backlink:hover {
 }
 .trackEl span:first-child {
   margin-top: 3rem;
+}
+
+form {
+  color: #41434b;
 }
 
 /*# sourceMappingURL=style.css.map */

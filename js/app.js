@@ -13,12 +13,10 @@ import {
 const initApp = {
     voertuigen: "",
     init: function () {
-        console.log("init app");
         if (document.getElementById('voertuigOverzichtPage') != null) {
             fetchEndpoint1();   
         }
         if (document.getElementById('voertuigDetailPage') != null) {
-            console.log("init app");
             loadvoertuigDetailPage();
         }
     }
