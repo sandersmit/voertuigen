@@ -14,25 +14,24 @@ import {
 //use local source
 //const endpoint1 = '../../data/rdw.json';
 //use online source
-//cars only
-//https://opendata.rdw.nl/resource/m9d7-ebf2.json?voertuigsoort=Personenauto
 //set scope to only cars. - could optionaly make a filter by using:  api.https://dev.socrata.com/docs/filtering.html
-const endpoint1 = 'https://opendata.rdw.nl/resource/m9d7-ebf2.json';
-const newLocal = function () {
+//get all results // is random
+//const endpoint1 = 'https://opendata.rdw.nl/resource/m9d7-ebf2.json';
+//get Pesonenauto's only
+const endpoint1 = 'https://opendata.rdw.nl/resource/m9d7-ebf2.json?voertuigsoort=Personenauto';
+const fetchEndpoint1 = function () {
     addloader();
     fetch(endpoint1).then(function (response) {
         return response.json();
     }).then(function (allDataFetched) {
-        removeloader();
-        initApp.voertuigen = allDataFetched;
-        init();
-        updateAppData();
+       removeloader();
+       initApp.voertuigen = allDataFetched;
+       init();
+       updateAppData();
     }).catch(function (error) {
         console.log(error);
     });
 };
-//const endpoint1 = 'https://opendata.rdw.nl/resource/m9d7-ebf2.json?voertuigsoort=Personenauto';
-const fetchEndpoint1 = newLocal;
 
 const fetchEndpoint2 = function (currvoertuiglinkAttrLocalStorage) {
     //use local storage in endpoint
@@ -46,6 +45,7 @@ const fetchEndpoint2 = function (currvoertuiglinkAttrLocalStorage) {
         console.log(error);
     });
 };
+//loader for user UI
 function addloader(){
     const loader = document.createElement("div");
     loader.classList.add("loader");

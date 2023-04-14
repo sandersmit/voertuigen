@@ -10,10 +10,10 @@ body {
   max-width: 1280px;
   margin: auto;
   margin-bottom: 100px;
-  h1{
-   position: relative;
-   margin-left: 1rem;
-   font-size: 2rem;
+  h1 {
+    position: relative;
+    margin-left: 1rem;
+    font-size: 2rem;
   }
   h2 {
     display: block;
@@ -26,7 +26,7 @@ body {
     position: relative;
     background-color: $voertuig-black;
   }
-  h4{
+  h4 {
     color: $voertuig-white-sec;
   }
 
@@ -69,7 +69,7 @@ body {
     display: flex;
     flex-direction: column;
     width: 100%;
-    header{
+    header {
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
@@ -82,30 +82,30 @@ body {
       top: 0;
       left: 0;
       opacity: 0.9;
-      div{
+      div {
         padding: 1rem;
         @media screen and (min-width: 768px) {
           padding: 2rem;
         }
-          h4{
-            font-size: 1.5rem;
-            color: $voertuig-blue;
-          }
-        &:nth-child(1){
-          h4{
+        h4 {
+          font-size: 1.5rem;
+          color: $voertuig-blue;
+        }
+        &:nth-child(1) {
+          h4 {
             color: $voertuig-white;
           }
-          p{
+          p {
             color: $voertuig-white-sec;
           }
           background: $voertuig-blue-sec;
         }
-        &:nth-child(2){
+        &:nth-child(2) {
           display: none;
           @media screen and (min-width: 768px) {
             display: block;
           }
-        } 
+        }
       }
     }
     ul {
@@ -116,9 +116,9 @@ body {
         a {
           display: block;
           text-decoration: none;
-          span{
+          span {
             display: block;
-            color:$voertuig-grey-sec;
+            color: $voertuig-grey-sec;
           }
         }
         h1 {
@@ -128,71 +128,67 @@ body {
     }
 
     #VoertuigOverzichtContainer {
-      ul{
+      ul {
         max-width: 100%;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      padding: 0;
-      margin-block-end: 0;
-      margin: auto;
-      
-      li {
-        position: relative;
-        max-width: 320px;
-        width: 50%;
-        @media screen and (min-width: 768px) {
-          max-width: 450px;
-          width: 100%; 
-        }
-        h5 {
-          padding-left: 25px;
-          background-position: 5px;
-          color: $voertuig-white;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: 0;
+        margin-block-end: 0;
+        margin: auto;
+
+        li {
           position: relative;
-          text-align: left;
-          cursor: pointer;
-          top: 0;
-          margin: 0;
-          z-index: 1;
-          transform: rotate(0deg);
-          background-image: url("../img/info-circle-solid.svg");
-          background-repeat: no-repeat;
-          background-size: 15px;
-          text-decoration: underline;
-          &:hover {
-            color: $voertuig-blue;
+          max-width: 320px;
+          width: 50%;
+          @media screen and (min-width: 768px) {
+            max-width: 450px;
+            width: 100%;
           }
-        }
-        a {
-          text-decoration: none;
-          h3 {
-            transition: 0.3s ease;
-            margin: 1rem 0rem;
+          h5 {
+            padding-left: 25px;
+            background-position: 5px;
+            color: $voertuig-white;
+            position: relative;
+            text-align: left;
+            cursor: pointer;
+            top: 0;
             margin: 0;
-            padding: 0;
-            background-image: url("../img/chevron-right-solid.svg");
+            z-index: 1;
+            transform: rotate(0deg);
+            background-image: url("../img/info-circle-solid.svg");
             background-repeat: no-repeat;
-            background-size: 10px;
-            background-position: -10% 6px;
-            padding-left: 0px;
+            background-size: 15px;
+            text-decoration: underline;
+            &:hover {
+              color: $voertuig-blue;
+            }
           }
-          &:hover {
+          a {
+            text-decoration: none;
             h3 {
-              color: $voertuig-white;
-              padding-left: 30px;
-              background-position: left 3px;
+              transition: 0.3s ease;
+              margin: 1rem 0rem;
+              margin: 0;
+              padding: 0;
+              background-image: url("../img/chevron-right-solid.svg");
+              background-repeat: no-repeat;
+              background-size: 10px;
+              background-position: -10% 6px;
+              padding-left: 0px;
+            }
+            &:hover {
+              h3 {
+                color: $voertuig-white;
+                padding-left: 30px;
+                background-position: left 3px;
+              }
             }
           }
         }
       }
-      }
-      
     }
-    
   }
-
-  
 }
 
 a {
@@ -232,19 +228,23 @@ a {
 }
 @keyframes spin {
   from {
-      transform: rotate(0deg);
+    transform: rotate(0deg);
   }
   to {
-      transform: rotate(360deg);
+    transform: rotate(360deg);
   }
 }
 
 .pagination {
-  &:after{
-    content:"";
+  &:after {
+    content: "";
     position: fixed;
     display: block;
-    background-image:  linear-gradient(to right, rgba(255,0,0,0), $voertuig-black);
+    background-image: linear-gradient(
+      to right,
+      rgba(255, 0, 0, 0),
+      $voertuig-black
+    );
     width: 63px;
     left: 290px;
     @media screen and (min-width: 768px) {
@@ -254,41 +254,41 @@ a {
     height: 58px;
     z-index: 5;
   }
- 
+
   display: flex;
   position: fixed;
-    bottom: 0px;
+  bottom: 0px;
+  background-color: $voertuig-black;
+  z-index: 2;
+  width: 250px;
+  @media screen and (min-width: 768px) {
+    width: 500px;
+  }
+  overflow: auto;
+  margin: 0;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  padding-inline-start: 0px;
+  padding: 0px 50px;
+  li {
+    list-style: none;
+    color: $voertuig-blue;
     background-color: $voertuig-black;
-    z-index: 2;
-    width: 250px;
-    @media screen and (min-width: 768px) {
-      width: 500px
+    text-decoration: none;
+    cursor: ew-resize;
+    //cursor:pointer;
+    //cursor: move;
+    line-height: 1rem;
+    padding: 20px;
+    margin: 0px;
+    font-family: "Segoe-Pro-Semibold";
+    &.active {
+      background-color: $voertuig-blue;
+      color: $voertuig-black;
     }
-    overflow: auto;
-    margin: 0;
-    margin-block-start: 0;
-    margin-block-end: 0;
-    padding-inline-start: 0px;
-    padding: 0px 50px;
-    li {
-      list-style: none;
-      color: $voertuig-blue;
-      background-color: $voertuig-black;
-      text-decoration: none;
-     cursor:ew-resize;
-     //cursor:pointer;
-     //cursor: move;
-     line-height: 1rem;
-     padding: 20px;
-     margin:0px;
-     font-family: "Segoe-Pro-Semibold";
-      &.active{
-        background-color: $voertuig-blue;
-        color: $voertuig-black;
-      }
-    }
-} 
-.trackEl{ 
+  }
+}
+.trackEl {
   background: $voertuig-grey;
   position: fixed;
   bottom: 0;
@@ -296,7 +296,7 @@ a {
   right: -205px;
   z-index: 3;
   max-height: 300px;
-  overflow-y:scroll ;
+  overflow-y: scroll;
   width: 250px;
   transition: cubic-bezier(0.075, 0.82, 0.165, 1);
   transition: all 0.5s;
@@ -305,15 +305,15 @@ a {
   @media screen and (min-width: 768px) {
     right: 0px;
   }
-  &.open{
+  &.open {
     top: inherit;
     bottom: 0px;
     right: 0px;
   }
 
-  h5{
+  h5 {
     cursor: pointer;
-    color:$voertuig-blue;
+    color: $voertuig-blue;
     margin: 0.5rem;
     margin-left: 1rem;
     background-image: url(../img/info-circle-solid.svg);
@@ -325,14 +325,12 @@ a {
     background-color: $voertuig-grey;
     top: 0;
     position: absolute;
-    
   }
-  span{
-    &:first-child{
+  span {
+    &:first-child {
       margin-top: 3rem;
-
     }
-    color:$voertuig-white-sec;
+    color: $voertuig-white-sec;
     padding-left: 1rem;
     display: block;
     text-align: center;
@@ -340,6 +338,6 @@ a {
   }
 }
 
-form{
+form {
   color: $voertuig-grey-sec;
 }

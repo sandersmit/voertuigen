@@ -6,11 +6,12 @@ import {
 } from './displayVoertuigDetail.js';
 
 
+//get the data object
 function updateAppData() {
     let AllData = initApp.voertuigen;
     return AllData;
 }
-
+//set a scoped array range in new array
 function updateRange( rangeNumber ){
     if ( rangeNumber == 0 ) {
         rangeNumber = 0;
@@ -22,11 +23,13 @@ function updateRange( rangeNumber ){
     return rangeArray;
 }
 
+//update page with new scoped range array
 function updatePaginitionItems(index){
     let rangeNumber = index; 
     fillArrays(updateAppData(), updateRange(rangeNumber));
 }
 
+//execute array loop with the chosen output for the user UI. 
 function fillArrays(AllData,newdataUpdate){
     let allcontentpages = [];
     const voertuigOverzichtContainer = document.getElementById("VoertuigOverzichtContainer");
@@ -38,7 +41,6 @@ function fillArrays(AllData,newdataUpdate){
         if (!newdataUpdate) {
             newdataUpdate = [0,50];
         }
-
         allcontentpages.slice(newdataUpdate[0] ,newdataUpdate[1]).forEach(function(value, index, arr){  
         let voertuigMerkVar = arr[index].merk;
         let voortuigSoort =  arr[index].voertuigsoort;
@@ -53,22 +55,25 @@ function fillArrays(AllData,newdataUpdate){
      });
      voertuigOverzichtContainer.appendChild(newListholder);
  }
-
+//component "Laatst bekekenvoertuigen"
  function trackDisplayVoortuig(){
     let trackEl = document.createElement('div');
     let container = document.getElementsByClassName("gridContainer");
     trackEl.classList.add('trackEl');
+    //check in localstorage for displaying it. 
     for (var i = 1; i <= localStorage.length; i++) {
         let trackElitem = document.createElement('span');
         const prevvoertuiglinkAttrLocalStorage = localStorage.getItem(i);
         trackElitem.append(prevvoertuiglinkAttrLocalStorage);    
         trackEl.prepend(trackElitem);
     }
+    //place it on te ui
     container[0].after(trackEl);
     trackEl.innerHTML+= `<h5>laatst bekeken voortuigen: </h5>`; 
     trackEl.addEventListener("click", openclose); 
 }
 
+//toggle component "Laatst bekekenvoertuigen"
 function openclose(event)
 {
     if (this.classList.contains('open')) {
@@ -87,12 +92,12 @@ function checkDomClick(event) {
         trackEle[0].classList.toggle("open");
         document.removeEventListener('click', checkDomClick);
     } 
-  };
+  }
 
 function addPaginition(pagenitionTotal){
     const pagenitionMenu = document.createElement("ul");
     pagenitionMenu.classList.add('pagination');  
-    // add horiontal scroll
+    // add horiontal scroll - instead of clicking to next menu item. - Feature UX
     pagenitionMenu.addEventListener("wheel", function (e) {
         if (e.deltaY > 0) {
             pagenitionMenu.scrollLeft += 100;
@@ -107,28 +112,30 @@ function addPaginition(pagenitionTotal){
         let container = document.getElementsByClassName("gridContainer");
         container[0].after(pagenitionMenu);
         for (let index = 1; index < pagenitionTotal; index++) {
-        updatePaginition(pagenitionMenu,index);
+            //plaats alle paginatie items die er zijn het menu
+            updatePaginition(pagenitionMenu,index);
         }
 }
+
 
 function updatePaginition(pagenitionMenu,index){
        let pagenitionItem = document.createElement("li");
         pagenitionItem.classList.add('btn');
-        let position = 0;
         pagenitionItem.addEventListener("click", changeStateMenuItem);
+        //add the scroll on mouse movement - part of UX feature
         pagenitionMenu.addEventListener("mousemove", checkmouseX);
           let btns = document.getElementsByClassName("btn");
           for (var i = 0; i < btns.length; i++) {
             btns[0].classList.add('active');  
           }
-          
+          //active state for user + update results on page 
           function changeStateMenuItem(event) {
-            updatePaginitionItems(index)
+            updatePaginitionItems(index);
             let current = document.getElementsByClassName("active");
             current[0].className = current[0].className.replace(" active", "");
             this.className += " active";
-            
             }
+            //add the scroll on mouse movement - part of UX feature
             function checkmouseX(e) {  
                 this.scrollLeft =+ e.clientX;
             }
@@ -136,15 +143,15 @@ function updatePaginition(pagenitionMenu,index){
         pagenitionItem.innerHTML += index;
         pagenitionMenu.appendChild(pagenitionItem);
 }
-
+//toon component "Laatst bekekenvoertuigen" alleen als er history is. 
 if (localStorage.length > 0) {
     trackDisplayVoortuig();
 }
-
+//first execute for dipaying ui. 
 function init() {
-    let AllData = initApp.voertuigen;
+    let AllData =  updateAppData();
     let totalPerPage = 50; 
-    let pagenitionTotal = initApp.voertuigen.length/totalPerPage;
+    let pagenitionTotal =  updateAppData().length/totalPerPage;
     addPaginition(pagenitionTotal);
     fillArrays(AllData);
 }
