@@ -5,7 +5,6 @@ import {
     setVoertuigDetailPage
 } from './displayVoertuigDetail.js';
 
-
 //get the data object
 function updateAppData() {
     let AllData = initApp.voertuigen;
