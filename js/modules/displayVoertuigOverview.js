@@ -97,18 +97,6 @@ function checkDomClick(event) {
 function addPaginition(pagenitionTotal){
     const pagenitionMenu = document.createElement("ul");
     pagenitionMenu.classList.add('pagination');  
-    // add horiontal scroll - instead of clicking to next menu item. - Feature UX
-    pagenitionMenu.addEventListener("wheel", function (e) {
-        if (e.deltaY > 0) {
-            pagenitionMenu.scrollLeft += 100;
-        //prevent scoll on the page
-        e.preventDefault();
-        }
-        else {
-            pagenitionMenu.scrollLeft -= 100;
-        e.preventDefault();
-        }
-    });
         let container = document.getElementsByClassName("gridContainer");
         container[0].after(pagenitionMenu);
         for (let index = 1; index < pagenitionTotal; index++) {
@@ -122,9 +110,13 @@ function updatePaginition(pagenitionMenu,index){
        let pagenitionItem = document.createElement("li");
         pagenitionItem.classList.add('btn');
         pagenitionItem.addEventListener("click", changeStateMenuItem);
-        //add the scroll on mouse movement - part of UX feature
+        // add horiontal scroll - instead of clicking to next menu item. - Feature UX
+      if(!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+        // false for mobile device - 
         pagenitionMenu.addEventListener("mousemove", checkmouseX);
-          let btns = document.getElementsByClassName("btn");
+      }
+       
+       let btns = document.getElementsByClassName("btn");
           for (var i = 0; i < btns.length; i++) {
             btns[0].classList.add('active');  
           }
