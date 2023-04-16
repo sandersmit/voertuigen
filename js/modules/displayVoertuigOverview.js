@@ -37,9 +37,11 @@ function fillArrays(AllData,newdataUpdate){
     for (let i in AllData) {
         allcontentpages.push(AllData[i]);
         }
+        //geen paginatie update - start dan op eerste range
         if (!newdataUpdate) {
             newdataUpdate = [0,50];
         }
+        //slice een nieuwe range
         allcontentpages.slice(newdataUpdate[0] ,newdataUpdate[1]).forEach(function(value, index, arr){  
         let voertuigMerkVar = arr[index].merk;
         let voortuigSoort =  arr[index].voertuigsoort;
@@ -47,7 +49,7 @@ function fillArrays(AllData,newdataUpdate){
         let voertuigHandelsBenaming = arr[index].handelsbenaming;
         let newElem = document.createElement('li');
         newElem.innerHTML =
-        `<a href='voortuigdetail.html' data-voertuigId=${voertuigenKenteken}><h3 data-voertuigId=${voertuigenKenteken}>
+        `<a href='detail.html' data-voertuigId=${voertuigenKenteken}><h3 data-voertuigId=${voertuigenKenteken}>
         ${voertuigMerkVar}<span>${voertuigHandelsBenaming}</span></h3></a>`;
         newListholder.appendChild(newElem);
         newElem.firstChild.addEventListener("click", setVoertuigDetailPage);
